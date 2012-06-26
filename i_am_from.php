@@ -41,29 +41,29 @@ $i_am_from_app = new \WpMvc\Application();
 $i_am_from_app->init( 'IAmFrom', WP_PLUGIN_DIR . '/i_am_from' );
 
 // WP: Add pages
-add_action( 'network_admin_menu', 'i_am_from' );
-function custom_footer()
+add_action( 'network_admin_menu', 'i_am_from_add_pages' );
+function i_am_from_add_pages()
 {
-  add_submenu_page( 'settings.php', 'Custom Footer Settings', 'Custom Footer', 'Super Admin', 'custom_footer_settings', 'custom_footer_settings_page');
+  add_submenu_page( 'settings.php', 'I Am From Settings', 'I Am From', 'Super Admin', 'i_am_from_settings', 'i_am_from_settings_page');
 }
 
-function custom_footer_settings_page()
+function i_am_from_settings_page()
 {
-  global $custom_footer_app;
+  global $i_am_from_app;
   
-  $custom_footer_app->footer_controller->index();
+  $i_am_from_app->settings_controller->index();
 }
 
-if ( isset( $_GET['custom_footer_updated'] ) ) {
-  add_action( 'network_admin_notices', 'custom_footer_updated_notice' );
+if ( isset( $_GET['i_am_from_updated'] ) ) {
+  add_action( 'network_admin_notices', 'i_am_from_updated_notice' );
 }
 
-function custom_footer_updated_notice()
+function i_am_from_updated_notice()
 {
   $html = \WpMvc\ViewHelper::admin_notice( __( 'Settings saved.' ) );
 
   echo $html;
-}*/
+}
 
 function wp_custom_user_profile_fields( $user )
     { ?>
