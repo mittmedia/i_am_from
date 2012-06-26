@@ -8,6 +8,7 @@ namespace IAmFrom
     {
       global $site;
       global $areas;
+      global $content;
 
       $site = \WpMvc\Site::find( 1 );
 
@@ -26,6 +27,31 @@ namespace IAmFrom
       foreach ( $sitemeta_vars as $key => $value ) {
         if ( preg_match( '/^((?!.*_link)i_am_from.*)$/', $key ) )
           array_push( $areas, $site->sitemeta->{$key} );
+      }
+
+      $content = array();
+
+      foreach ( $areas as $area ) {
+        $area_content = array(
+          'title' => 'Name',
+          'name' => $site->sitemeta->{$area->meta_key}->meta_key,
+          'type' => 'text',
+          'object' => $site->sitemeta->{$area->meta_key},
+          'default_value' => $site->sitemeta->{$area->meta_key}->meta_value,
+          'key' => 'meta_value'
+        );
+
+        $area_link = array(
+          'title' => 'Link',
+          'name' => $site->sitemeta->{$area->meta_key . '_link'}->meta_key,
+          'type' => 'text',
+          'object' => $site->sitemeta->{$area->meta_key . '_link'},
+          'default_value' => $site->sitemeta->{$area->meta_key . '_link'}->meta_value,
+          'key' => 'meta_value'
+        );
+
+        array_push( $content, $area_content );
+        array_push( $content, $area_link );
       }
 
       $this->render( $this, "index" );
