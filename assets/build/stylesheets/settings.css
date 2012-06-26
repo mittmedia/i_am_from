@@ -1,2 +1,4 @@
-body {
-  background: blue; }
+.i_am_from .form-table tr {
+  background: #fcfcfc; }
+.i_am_from .form-table tr.spacer {
+  background: none; }

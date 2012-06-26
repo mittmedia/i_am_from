@@ -33,7 +33,7 @@ namespace IAmFrom
 
       foreach ( $areas as $area ) {
         $area_content = array(
-          'title' => 'Name',
+          'title' => __( 'Name' ),
           'name' => $site->sitemeta->{$area->meta_key}->meta_key,
           'type' => 'text',
           'object' => $site->sitemeta->{$area->meta_key},
@@ -42,7 +42,7 @@ namespace IAmFrom
         );
 
         $area_link = array(
-          'title' => 'Link',
+          'title' => __( 'Link' ),
           'name' => $site->sitemeta->{$area->meta_key . '_link'}->meta_key,
           'type' => 'text',
           'object' => $site->sitemeta->{$area->meta_key . '_link'},
@@ -52,6 +52,7 @@ namespace IAmFrom
 
         array_push( $content, $area_content );
         array_push( $content, $area_link );
+        array_push( $content, array( 'type' => 'spacer' ) );
       }
 
       $this->render( $this, "index" );
