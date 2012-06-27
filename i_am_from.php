@@ -56,7 +56,8 @@ function i_am_from_settings_page()
 
 add_action( 'admin_enqueue_scripts', 'i_am_from_add_styles' );
 function i_am_from_add_styles() {
-  wp_enqueue_style( 'i_am_from_styles_settings', WP_PLUGIN_URL . '/i_am_from/assets/build/stylesheets/settings.css' );
+  wp_enqueue_style( 'i_am_from_style_settings', WP_PLUGIN_URL . '/i_am_from/assets/build/stylesheets/settings.css' );
+  wp_enqueue_script( 'i_am_from_script_settings', WP_PLUGIN_URL . '/i_am_from/assets/build/javascripts/settings.js' );
 }
 
 if ( isset( $_GET['i_am_from_updated'] ) ) {

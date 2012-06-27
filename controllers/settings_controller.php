@@ -14,8 +14,8 @@ namespace IAmFrom
       $site = \WpMvc\Site::find( $current_site->id );
 
       if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-        if ( isset( $_POST['delete_action'] ) )
-          \WpMvc\DevHelper::dump( 'delete it!' ); die;
+        //if ( isset( $_POST['delete_action'] ) )
+        //  \WpMvc\DevHelper::dump( 'delete it!' ); die;
 
         if ( isset( $_POST['site']['sitemeta']['i_am_from'] ) && trim( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) != '' ) {
           $websafe_name = 'i_am_from_';
@@ -85,12 +85,10 @@ namespace IAmFrom
         );
 
         $content[] = array(
-          'title' => __( 'Name' ),
+          'title' => __( 'Delete' ),
           'name' => $site->sitemeta->{$area->meta_key}->meta_key,
           'type' => 'delete_action',
-          'object' => $site->sitemeta->{$area->meta_key},
-          'default_value' => $site->sitemeta->{$area->meta_key}->meta_value,
-          'key' => 'meta_value'
+          'object' => $site->sitemeta->{$area->meta_key}
         );
 
         $content[] = array( 'type' => 'spacer' );
