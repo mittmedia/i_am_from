@@ -8,7 +8,7 @@ sprockets.append_path "assets/source/stylesheets"
 
 # CONFIG
 sass = ['settings.css.sass']
-coffee = ['application.js']
+coffee = ['settings.js.coffee']
 
 # TASKS
 namespace :build do
