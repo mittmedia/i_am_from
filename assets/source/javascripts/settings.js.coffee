@@ -1,7 +1,7 @@
 @IAmFrom =
   add_delete_events: ->
     jQuery( '.delete_action' ).on 'click', ->
-      hidden_input = jQuery( "<input type='hidden' value='#{@.name}' />" )
+      hidden_input = jQuery( "<input type='hidden' name='#{@.name}' />" )
       jQuery( 'form' ).append( hidden_input )
       element_class = jQuery( @ ).parent().parent().attr( 'class' )
       class_to_hide_array = element_class.split( ' ' )

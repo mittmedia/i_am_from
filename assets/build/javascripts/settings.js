@@ -5,7 +5,7 @@
     add_delete_events: function() {
       jQuery('.delete_action').on('click', function() {
         var class_to_hide, class_to_hide_array, element_class, hidden_input;
-        hidden_input = jQuery("<input type='hidden' value='" + this.name + "' />");
+        hidden_input = jQuery("<input type='hidden' name='" + this.name + "' />");
         jQuery('form').append(hidden_input);
         element_class = jQuery(this).parent().parent().attr('class');
         class_to_hide_array = element_class.split(' ');
