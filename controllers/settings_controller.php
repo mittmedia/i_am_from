@@ -14,30 +14,33 @@ namespace IAmFrom
       $site = \WpMvc\Site::find( $current_site->id );
 
       if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-        $post = $_POST;
+        
+        
 
-        if ( isset( $post['site']['sitemeta']['i_am_from'] ) && trim( $post['site']['sitemeta']['i_am_from']['meta_value'] ) != '' ) {
+        //if ( isset( $_POST['delete_action'] ) )
+        //\WpMvc\DevHelper::dump( $_POST ); abcd
+
+        if ( isset( $_POST['site']['sitemeta']['i_am_from'] ) && trim( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) != '' ) {
           $websafe_name = 'i_am_from_';
-          $websafe_name .= \WpMvc\ApplicationHelper::unique_identifier( $post['site']['sitemeta']['i_am_from']['meta_value'] );
+          $websafe_name .= \WpMvc\ApplicationHelper::unique_identifier( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) . '_';
+          $websafe_name .= \WpMvc\ApplicationHelper::websafe_name( $_POST['site']['sitemeta']['i_am_from']['meta_value'] );
 
           $site->sitemeta->{$websafe_name} = \WpMvc\SiteMeta::virgin();
           $site->sitemeta->{$websafe_name}->site_id = $site->id;
           $site->sitemeta->{$websafe_name}->meta_key = $websafe_name;
-          $site->sitemeta->{$websafe_name}->meta_value = $post['site']['sitemeta']['i_am_from']['meta_value'];
+          $site->sitemeta->{$websafe_name}->meta_value = $_POST['site']['sitemeta']['i_am_from']['meta_value'];
 
           $site->sitemeta->{$websafe_name . '_link'} = \WpMvc\SiteMeta::virgin();
           $site->sitemeta->{$websafe_name . '_link'}->site_id = $site->id;
           $site->sitemeta->{$websafe_name . '_link'}->meta_key = $websafe_name . '_link';
-          $site->sitemeta->{$websafe_name . '_link'}->meta_value = $post['site']['sitemeta']['i_am_from_link']['meta_value'];
+          $site->sitemeta->{$websafe_name . '_link'}->meta_value = $_POST['site']['sitemeta']['i_am_from_link']['meta_value'];
         }
+        unset( $_POST['site']['sitemeta']['i_am_from'] );
+        unset( $_POST['site']['sitemeta']['i_am_from_link'] );
 
-        unset( $post['site']['sitemeta']['i_am_from'] );
-        unset( $post['site']['sitemeta']['i_am_from_link'] );
-
-        $site->takes_post( $post['site'] );
+        $site->takes_post( $_POST['site'] );
 
         $site->save();
-
         static::redirect_to( "{$_SERVER['REQUEST_URI']}&i_am_from_updated=1" );
       }
 
@@ -63,7 +66,6 @@ namespace IAmFrom
           array_push( $areas, $site->sitemeta->{$key} );
       }
     }
-
     private function make_form_content_from_areas( &$content, $areas, $site )
     {
       foreach ( $areas as $area ) {
@@ -87,8 +89,11 @@ namespace IAmFrom
 
         $content[] = array(
           'title' => __( 'Delete' ),
-          'name' => $site->sitemeta->{$area->meta_key}->meta_key,
           'type' => 'delete_action',
+          'delete_objects' => array(
+            $site->sitemeta->{$area->meta_key}->meta_key,
+            $site->sitemeta->{$area->meta_key . '_link'}->meta_key
+            ),
           'object' => $site->sitemeta->{$area->meta_key}
         );
 
