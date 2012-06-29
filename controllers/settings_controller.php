@@ -14,12 +14,6 @@ namespace IAmFrom
       $site = \WpMvc\Site::find( $current_site->id );
 
       if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-        
-        
-
-        //if ( isset( $_POST['delete_action'] ) )
-        //\WpMvc\DevHelper::dump( $_POST ); abcd
-
         if ( isset( $_POST['site']['sitemeta']['i_am_from'] ) && trim( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) != '' ) {
           $websafe_name = 'i_am_from_';
           $websafe_name .= \WpMvc\ApplicationHelper::unique_identifier( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) . '_';
