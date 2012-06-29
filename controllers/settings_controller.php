@@ -16,8 +16,7 @@ namespace IAmFrom
       if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
         if ( isset( $_POST['site']['sitemeta']['i_am_from'] ) && trim( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) != '' ) {
           $websafe_name = 'i_am_from_';
-          $websafe_name .= \WpMvc\ApplicationHelper::unique_identifier( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) . '_';
-          $websafe_name .= \WpMvc\ApplicationHelper::websafe_name( $_POST['site']['sitemeta']['i_am_from']['meta_value'] );
+          $websafe_name .= \WpMvc\ApplicationHelper::unique_identifier( $_POST['site']['sitemeta']['i_am_from']['meta_value'] );
 
           $site->sitemeta->{$websafe_name} = \WpMvc\SiteMeta::virgin();
           $site->sitemeta->{$websafe_name}->site_id = $site->id;
