@@ -50,7 +50,7 @@ function i_am_from_add_pages()
 function i_am_from_settings_page()
 {
   global $i_am_from_app;
-  
+
   $i_am_from_app->settings_controller->index();
 }
 
@@ -73,9 +73,9 @@ function i_am_from_updated_notice()
 
 function wp_custom_user_profile_fields( $user )
     { ?>
- 
+
         <h3><?php _e("Custom Profile Information"); ?></h3>
- 
+
         <table class="form-table">
             <tr>
                 <th><label for="address"><?php _e("Address"); ?></label></th>
@@ -107,19 +107,19 @@ function wp_custom_user_profile_fields( $user )
             </tr>
         </table>
 <?php }
- 
+
 add_action( 'show_user_profile', 'wp_custom_user_profile_fields' ); //Add Some Action
 add_action( 'edit_user_profile', 'wp_custom_user_profile_fields' );
- 
+
 function wp_save_custom_user_profile_fields( $user_id )
     {
         if ( !current_user_can( 'edit_user', $user_id ) ) { return false; } //User Auth
- 
+
         update_usermeta( $user_id, 'address', $_POST['address'] );
         update_usermeta( $user_id, 'city', $_POST['city'] );
         update_usermeta( $user_id, 'province', $_POST['province'] );
         update_usermeta( $user_id, 'postalcode', $_POST['postalcode'] );
     }
- 
+
 //add_action( 'personal_options_update', 'wp_save_custom_user_profile_fields' );
 //add_action( 'edit_user_profile_update', 'wp_save_custom_user_profile_fields' );
