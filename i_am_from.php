@@ -54,10 +54,12 @@ function i_am_from_settings_page()
   $i_am_from_app->settings_controller->index();
 }
 
-add_action( 'admin_enqueue_scripts', 'i_am_from_add_scripts_and_styles' );
+add_filter('admin_head', 'i_am_from_add_scripts_and_styles');
 function i_am_from_add_scripts_and_styles() {
-  wp_enqueue_style( 'i_am_from_style_settings', WP_PLUGIN_URL . '/i_am_from/assets/build/stylesheets/settings.css' );
-  wp_enqueue_script( 'i_am_from_script_settings', WP_PLUGIN_URL . '/i_am_from/assets/build/javascripts/settings.js' );
+  if (isset( $_GET['page'] ) && $_GET['page'] == 'i_am_from_settings') {
+    echo '<link rel="stylesheet" type="text/css" href="' . WP_PLUGIN_URL . '/i_am_from/assets/build/stylesheets/settings.css' . '" />';
+    echo '<script type="text/javascript" src="' . WP_PLUGIN_URL . '/i_am_from/assets/build/javascripts/settings.js' . '"></script>';
+  }
 }
 
 if ( isset( $_GET['i_am_from_updated'] ) ) {
