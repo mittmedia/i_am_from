@@ -13,7 +13,7 @@ namespace IAmFrom
 
       $site = \WpMvc\Site::find( $current_site->id );
 
-      if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+      if ( $_SERVER['REQUEST_METHOD'] == 'POST' && isset( $_GET['page'] ) && $_GET['page'] == 'i_am_from_settings' ) {
         if ( isset( $_POST['site']['sitemeta']['i_am_from'] ) && trim( $_POST['site']['sitemeta']['i_am_from']['meta_value'] ) != '' ) {
           $websafe_name = 'i_am_from_';
           $websafe_name .= \WpMvc\ApplicationHelper::unique_identifier( $_POST['site']['sitemeta']['i_am_from']['meta_value'] );
@@ -44,7 +44,7 @@ namespace IAmFrom
       $content = array();
 
       $this->make_form_content_from_areas( $content, $areas, $site );
-      
+
       $this->make_form_content_from_new_area( $content, $site );
 
       $this->render( $this, "index" );
