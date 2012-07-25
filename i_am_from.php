@@ -44,7 +44,7 @@ $i_am_from_app->init( 'IAmFrom', WP_PLUGIN_DIR . '/i_am_from' );
 add_action( 'network_admin_menu', 'i_am_from_add_pages' );
 function i_am_from_add_pages()
 {
-  add_submenu_page( 'settings.php', 'I Am From Settings', 'I Am From', 'Super Admin', 'i_am_from_settings', 'i_am_from_settings_page');
+  add_submenu_page( 'settings.php', 'I Am From Settings', 'I Am From', 'manage_network', 'i_am_from_settings', 'i_am_from_settings_page');
 }
 
 function i_am_from_settings_page()
